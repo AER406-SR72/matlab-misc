@@ -4,7 +4,7 @@
 % 1300mAhr, 3 cells, 30C battery.
 %
 % PathName for UIUC data *** EDIT THIS ****
-PathName = '/Users/prgrant/Documents/Courses/AER1216/UIUC-propDB/volume-1/data/';
+PathName = 'lib/UIUC-propDB/volume-1/data/';
 
 in2m = 0.0254;
 rho = 1.225;

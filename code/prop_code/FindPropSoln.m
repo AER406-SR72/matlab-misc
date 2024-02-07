@@ -3,7 +3,7 @@
 % required thrust
 %
 % PathName for UIUC data *** EDIT THIS ****
-PathName = '/Users/prgrant/Documents/Courses/AER1216/UIUC-propDB/volume-1/data/';
+PathName = 'lib/UIUC-propDB/volume-1/data/';
 
 %
 %
