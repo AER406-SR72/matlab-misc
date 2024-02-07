@@ -12,7 +12,7 @@ PathName = 'lib/UIUC-propDB/volume-1/data/';
 prompt = {'Enter Velocity m/s'; 'Enter Required Thrust';'Enter Battery Discharge (mAhr)0-1300'};
 dlgtitle = 'Velocity';
 dims = 3;
-definput = {'10','1.5','100'};
+definput = {'10','1.8','100'};
 answer = inputdlg(prompt,dlgtitle,dims,definput);
 V = str2num(answer{1});
 T = str2num(answer{2});
@@ -29,73 +29,15 @@ DC = 100; % 100mAhr discharge
 %
 % Now read in motor data
 %
-motoropts = {'AXI 2216/16','D2830-11','SK3 2830-1020','SSX 2212-980','SSXV3 2216-950','SSXV3 2216-880','SSXV3 2212-980'};
-promptstring = {'Select Motor for Analysis'};
-[indx,tf] = listdlg('PromptString',promptstring,'SelectionMode','single',...
-    'ListString',motoropts);
 
-switch indx
-    case 1
-        % AXI 2216/17
-        % Data for motor
-        %AXI 2017/16
-        motorname = 'AXI_2216_17';
-        K_v = 1050*2*pi/60*1.0; %RPM/V->rad/s/V
-        K_t = 1/K_v;
-        i_0 = 0.4; % A at 10V
-        r_m = 0.120; %Ohm
-        imax = 22;
-    case 2
-        % D2830-11 (1000 2019 motor)
-        motorname = 'D_2830_11';
-        K_v = 1000*2*pi/60*1.0;
-        K_t = 1/K_v;
-        i_0 = 0.4;
-        r_m = 0.11;
-        imax = 21;
-    case 3
-        % SK302830-1020
-        motorname = 'SK3_2830_1020';
-        K_v = 1020*2*pi/60*1.0;
-        %K_v = 843*2*pi/60*1.0;
-        K_t = 1/K_v;
-        i_0 = 0.95;
-        r_m = 0.112;
-        imax = 18;
-    case 4
-        % sunnysky X2212 980Kv
-        motorname = 'SSX_2212_980';
-        K_v = 980*2*pi/60*1.0;
-        K_t = 1/K_v;
-        i_0 = 0.3;
-        r_m = 0.133;
-        imax = 15;
-    case 5
-        % sunnysky XV3 2216 950Kv
-        motorname = 'SSXV3_2216_950';
-        K_v = 950*2*pi/60*1.0;
-        K_t = 1/K_v;
-        i_0 = 0.7;
-        r_m = 0.0736;
-        imax = 32;
-    case 6
-        % sunnysky XV3 2216 880Kv
-        motorname = 'SSXV3_2216_880';
-        K_v = 880*2*pi/60*1.0;
-        K_t = 1/K_v;
-        i_0 = 0.5;
-        r_m = 0.089;
-        imax = 32;
-    case 7
-        % sunnysky XV3 2212 980Kv
-        motorname = 'SSXV3_2212_980';
-        K_v = 980*2*pi/60*1.0;
-        K_t = 1/K_v;
-        i_0 = 0.6;
-        r_m = 0.092;
-        imax = 26;
-
-end
+% sunnysky XV3 2216 950Kv
+motorname = 'SSXV3_2216_950';
+K_v = 950*2*pi/60*1.0;
+K_t = 1/K_v;
+i_0 = 0.7;
+r_m = 0.0736;
+imax = 32;
+    
 %
 r_esc =0.02;
 %
