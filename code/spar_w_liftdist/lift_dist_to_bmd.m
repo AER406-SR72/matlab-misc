@@ -5,7 +5,7 @@ C1 = [0    0.4470    0.7410];
 C2 = [0.8500    0.3250    0.0980];
 C3 = [0.9290    0.6940    0.1250];
 
-CASE = "crs";
+CASE = "tkf";
 
 %% Read Lift Dist
 dist_l = readmatrix(sprintf("NF844_D_ldist_%s.txt", CASE));
@@ -67,9 +67,11 @@ title("Structural Bending Moment", "Interpreter", "latex")
 ylim([0, 3])
 
 %% Export
-plot_darkmode
-exportgraphics(gcf,sprintf("BMD_%s.png", CASE), 'Resolution', 600, ...
-    'BackgroundColor','#191919')
+% plot_darkmode
+% exportgraphics(gcf,sprintf("BMD_%s.png", CASE), 'Resolution', 600, ...
+%     'BackgroundColor','#191919')
+
+exportgraphics(gcf,sprintf("BMD_%s.pdf", CASE))
 
 
 %% Section Sizing
