@@ -61,19 +61,21 @@ function [PropData] = read_prop_data(propname,RPMD,PathName,PrintOpt)
    % one smaller and one larger
    %
    Diff = abs(RPM-RPMD);
+
    [tmp,ii]=sort(Diff);
    i1 = ii(1);
    i2 = ii(2);
    indexes = [i1,i2];
-   if Diff(i1) > 50
-       fprintf('Error could not find RPM file close to desired RPM, Diff = %f\n',Diff(i1));
-   end 
-   if Diff(i2) > 250
+   if max(RPM) < RPMD
+       indexes= [i1,i2];
+       fprintf('Warning, using largest two RPM files RPMD = %f RPM1 = %f RPM2 = %f\n',RPMD,RPM(i1),RPM(i2));
+   elseif Diff(i2) > 250 & Diff(i1) <= 50
        fprintf('Warning only one RPM file for RPMD = %f\n',RPMD);
        indexes = [i1];
-   elseif Diff(i2) > 50
-       fprintf('Warning one RPM file is > 50 from desired RPM, Diff = %f\n',Diff(i2));
-   end
+   elseif Diff(i1) > 50
+       fprintf('Error could not find RPM file close to desired RPM, Diff = %f\n',Diff(i1));
+   end 
+
    %
    % write out results for debugging!
    %

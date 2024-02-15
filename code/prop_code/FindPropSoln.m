@@ -9,14 +9,8 @@ PathName = 'lib/UIUC-propDB/volume-1/data/';
 %
 % Thrust and velocity you'd like to generate
 %
-prompt = {'Enter Velocity m/s'; 'Enter Required Thrust';'Enter Battery Discharge (mAhr)0-1300'};
-dlgtitle = 'Velocity';
-dims = 3;
-definput = {'10','1.8','100'};
-answer = inputdlg(prompt,dlgtitle,dims,definput);
-V = str2num(answer{1});
-T = str2num(answer{2});
-DC = str2num(answer{3});
+V = 10;
+T = 1.7;
 
 %
 %
