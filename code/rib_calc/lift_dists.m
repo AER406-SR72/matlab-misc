@@ -1,7 +1,7 @@
 %% Params
-n = 3;
+n = 3.54;
 m0 = 1.63;
-W = m0 * 9.08665;
+W = m0 * 9.80665;
 b = 1.7;
 % Rectangular spar
 spar_d = 0.006;
@@ -20,7 +20,7 @@ control_points_xle = mirror_vert([0; 0.120; 0.215; 0.598]);
 
 %% Rib Points (postiive only)
 rib_y = mirror_vert(0.001 * [0; 92.5; 185; 318; 451; 584; 717; 850], true);
-rib_t = mirror_vert(25.4/1000 * [1/16; 1/16; 1/16; 1/16; 1/16; 1/16; 1/16; 1/16]);
+rib_t = mirror_vert(25.4/1000 * [1/8; 1/16; 1/16; 1/16; 1/16; 1/16; 1/16; 1/16]);
 
 % interp intermediate ribs
 [rib_c, rib_A, rib_h, rib_xle] = interp_ribs(...
