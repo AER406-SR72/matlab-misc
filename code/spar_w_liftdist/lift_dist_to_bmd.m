@@ -1,19 +1,20 @@
 W = 1.627 .* 9.80665;
-n = 3.54;
+n = 4.91;
 
 %% Colors
 C1 = [0    0.4470    0.7410];
 C2 = [0.8500    0.3250    0.0980];
 C3 = [0.9290    0.6940    0.1250];
 
-CASE = "tkf";
+CASE = "Full_stall";
 
 %% Read Lift Dist
-dist_l = readmatrix(sprintf("NF844_D_ldist_%s.txt", CASE));
-dist_cl = readmatrix(sprintf("NF844_D_CLdist_%s.txt", CASE));
-y = dist_l(:, 1);
-l_y = dist_l(:, 2);
-cl_y = dist_cl(:, 2);
+dist_l = readmatrix(sprintf("%s_L.csv", CASE));
+y = dist_l(2:end, 1);
+l_y = dist_l(2:end, 2);
+% fix bullshit
+y = y(l_y > 0);
+l_y = l_y(l_y > 0);
 l_y = n * W ./ trapz(y, l_y) .* l_y;
 
 b = max(y) - min(y);
@@ -23,7 +24,7 @@ y_smooth = linspace(-b/2, b/2, 400);
 l_y_smooth = interp1(y, l_y, y_smooth, "spline");
 
 [~, idx_y0] = min(abs(y_smooth));
-l_elp = max(l_y).*sqrt(1-(2.*y_smooth./b).^2);
+l_elp = 4 * n * W / (b*pi) .*sqrt(1-(2.*y_smooth./b).^2);
 
 % BC: zero at ends
 shear_force = cumtrapz(y_smooth, -l_y_smooth .* sign(y_smooth));
@@ -81,7 +82,10 @@ title("Spar Loading", "Interpreter", "latex")
 
 yyaxis right
 plot(y_smooth, max_b_stress*1e-6, "LineWidth", 2)
+sigma_max = max(max_b_stress*1e-6);
+yline(sigma_max, "--", "color", C2);
 ylabel("Bending Stress (MPa)")
+yticks(sort([yticks, sigma_max]))
 
 % Beam Deflection
 subplot(313)
@@ -90,12 +94,13 @@ plot(y_smooth, deflection*1e3, "LineWidth", 2)
 ylabel("Deflection (mm)")
 grid
 lims = ylim;
-yticks(0:2:10)
 xlabel("$$y$$ (m)", "Interpreter", "latex")
 
 yyaxis right
 ylabel("\% Span")
 ylim(lims*1e-3 ./ b * 100)
+t = yticks;
+yticks(sort([yticks, max(lims*1e-3 ./ b * 100)]))
 
 title("Spar Deformation", "Interpreter", "latex")
 

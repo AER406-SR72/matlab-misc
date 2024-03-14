@@ -6,3 +6,4 @@ CL = arr(:, 2);
 AR = 5.106;
 
 e_invisc = CL.^2 ./ (CD .* pi .* AR);
+mean(e_invisc)
