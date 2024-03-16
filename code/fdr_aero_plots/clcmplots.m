@@ -1,4 +1,4 @@
-CASE = "empty";
+CASE = "full";
 
 mat = readmatrix(sprintf("Cl-Cm-all-defs-%s.csv", CASE));
 
@@ -19,13 +19,13 @@ for i = 1:length(labels)
     cm = cm(cl > -0.1);
     cl = cl(cl > -0.1);
 
-    plot(cm, cl, styles(i), "DisplayName", labels(i), "Linewidth", 1);
+    plot(cl, cm, styles(i), "DisplayName", labels(i), "Linewidth", 1);
     hold on
 end
 set(gca, 'YAxisLocation', 'origin')
 set(gca, 'XAxisLocation', 'origin')
-xlabel("$C_M$")
-ylabel("$C_L$")
+xlabel("$C_L$")
+ylabel("$C_M$")
 legend("location", "best")
 if CASE == "full"
     title("Full Cargo Load Static Longitudinal Performance")
