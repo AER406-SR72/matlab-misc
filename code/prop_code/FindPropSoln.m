@@ -10,7 +10,7 @@ PathName = 'lib/UIUC-propDB/volume-1/data/';
 % Thrust and velocity you'd like to generate
 %
 V = 10;
-T = 1.7;
+T = 1.626;
 
 %
 %
